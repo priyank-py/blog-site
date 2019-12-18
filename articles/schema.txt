@@ -1,0 +1,7 @@
+title: chars (250)
+writer: chars (100)
+content: text 
+published_on: datetime
+modified_on:
+genre: chars (20) -> choices
+title_image: image 
