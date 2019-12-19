@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
 <title>Home</title>
@@ -6,6 +7,37 @@
 
 {% block content %}
 
-<h1 class="text-center text-muted-my-4">Welcome to our Blog!</h1>
+<h1 class="text-center text-muted-my-5">Welcome to our Blog!</h1>
+<div class="row">
+    {% for article in articles %}
+
+    <div class="article mt-5 col-md-8">
+        <h2 class="mb-2">{{article.title}} </h2>
+        <p id="blog-{{article.id}}">{{article.body}}</p><button onclick=show({{article.id}})>more</button>
+        <hr color="aqua">
+    </div>
+
+    {% endfor %}
+</div>
+<script>
+
+const paras = document.querySelectorAll('.article p');
+let minText = 140
+paras.forEach(para => {
+    para.textContent = para.textContent.slice(0, 140)
+})
+
+const show = (id) => {
+    let para = document.querySelector('#blog-{{article.id}}')
+    console.log(id)
+    if (minText == 140){
+        para.textContent = para.textContent.slice(0, )
+    }
+}
+
+
+</script>
+
+
 
 {% endblock content %}
