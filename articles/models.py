@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
+from taggit.managers import TaggableManager
 
 GENRE_CHOICES = [
     ('adventure', 'Adventure'),
@@ -21,6 +22,8 @@ class Article(models.Model):
     modified_on = models.DateTimeField(_("Modified on"), auto_now=True)
     title_image = models.ImageField(_("Title Image"), upload_to=upload_image, blank=True, null=True)
     body = models.TextField(_("Content"))
+    keywords = TaggableManager(verbose_name='Keywords')
+
 
     def __str__(self):
         return self.title
