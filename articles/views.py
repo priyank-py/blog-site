@@ -12,8 +12,8 @@ def home(request):
 
     return render(request, 'main/index.html', context)
 
-def each_article(request, id):
-    article = get_object_or_404(Article, id=id)
+def each_article(request, slug):
+    article = get_object_or_404(Article, slug=slug)
     body = article.body.split('\n')
     context = {
         'article': article,

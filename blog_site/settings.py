@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'taggit',
     'articles',
+    'rest_framework',
+    'tinymce',
 ]
 
 MIDDLEWARE = [

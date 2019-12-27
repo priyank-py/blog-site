@@ -12,7 +12,7 @@
     {% for article in articles %}
 
     <div class="article mt-5 col-md-8">
-        <h2 class="mb-2"><a href="{% url 'each_article' article.id %}">{{article.title}}</a> </h2>
+        <h2 class="mb-2"><a href="{% url 'each_article' article.slug %}">{{article.title}}</a> </h2>
         <p id="blog-{{article.id}}">{{article.body}}</p><button onclick=show({{article.id}})>more</button>
         <hr color="aqua">
     </div>

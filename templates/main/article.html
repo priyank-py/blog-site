@@ -26,11 +26,7 @@
 
         <div class="content mx-auto" style="max-width: 800px;">
         
-        {% for para in body %} 
-        
-        <p>{{para}} </p>
-        
-        {% endfor %}
+        {{article.body|safe}}
         </div>
         
     </div>

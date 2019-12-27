@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.utils.text import slugify
 from django.utils import timezone
+from tinymce.models import HTMLField
 from taggit.managers import TaggableManager
 
 GENRE_CHOICES = [
@@ -21,9 +23,16 @@ class Article(models.Model):
     published_on = models.DateTimeField(_("Published on"), auto_now_add=True)
     modified_on = models.DateTimeField(_("Modified on"), auto_now=True)
     title_image = models.ImageField(_("Title Image"), upload_to=upload_image, blank=True, null=True)
-    body = models.TextField(_("Content"))
-    keywords = TaggableManager(verbose_name='Keywords')
-
+    body = HTMLField(_("Content"))
+    keywords = TaggableManager(verbose_name='Keywords', blank=True)
+    slug = models.SlugField(_("slug"), blank=True)
 
     def __str__(self):
         return self.title
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(f'{self.title}-{self.writer}')
+        super(Article, self).save(*args, **kwargs)
+    
+
