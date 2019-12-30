@@ -25,7 +25,7 @@ class Article(models.Model):
     title_image = models.ImageField(_("Title Image"), upload_to=upload_image, blank=True, null=True)
     body = HTMLField(_("Content"))
     keywords = TaggableManager(verbose_name='Keywords', blank=True)
-    slug = models.SlugField(_("slug"), blank=True)
+    slug = models.SlugField(_("slug"), blank=True, unique=True)
 
     def __str__(self):
         return self.title
