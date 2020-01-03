@@ -20,3 +20,6 @@ def each_article(request, slug):
         'body': body
     }
     return render(request, 'main/article.html', context)
+
+def contact_us(request):
+    return render(request, 'main/contact_us.html')
