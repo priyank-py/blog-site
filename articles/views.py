@@ -6,8 +6,12 @@ def home(request):
     if len(articles) > 5:
         articles = articles[:5]
     
+    slugs = [i.slug for i in articles]
+    print(slugs)
+    
     context = {
         'articles': articles,
+        'slugs': slugs,
     }
 
     return render(request, 'main/index.html', context)
@@ -23,3 +27,20 @@ def each_article(request, slug):
 
 def contact_us(request):
     return render(request, 'main/contact_us.html')
+
+
+def about(request):
+    return render(request, 'main/about.html')
+
+def search_article(request):
+    if request.method == 'POST':
+        search_text = request.POST.get('searched')
+    else:
+        search_text = ''
+    articles = Article.objects.filter(title__icontains=search_text)
+    slugs = [i.slug for i in articles]
+    context = {
+        'articles': articles,
+        'slugs': slugs
+    }
+    return render(request, 'main/index.html', context)

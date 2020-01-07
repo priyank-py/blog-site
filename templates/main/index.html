@@ -9,17 +9,34 @@
 
 
 <div class="row">
+    <div class="article mt-5 col-md-8">
     {% for article in articles %}
 
-    <div class="article mt-5 col-md-8">
         <h2 class="mb-2"><a href="{% url 'each_article' article.slug %}">{{article.title}}</a> </h2>
         <p id="blog-{{article.id}}">{{article.body}}</p><button onclick=show({{article.id}})>more</button>
         <hr color="aqua">
-    </div>
-
     {% endfor %}
+    </div>
+    <div class="col-4">
+        <form method="POST" action="{% url 'search_article' %}" class="">
+        {% csrf_token %}
+        <div class="input-group bg-light" style="border-radius:40px;">
+        
+            <input autocomplete="off" type="text" class="form-control form-control-lg shadow-none border-0" style="background:none;" name="searched">
+
+            <span class="input-group-append text-dark d-flex align-items-center">
+                <button type="submit" style="background:none;" class="border-0">
+                    <i class="fa fa-search mr-2" style="font-size:25px;"></i>
+                </button>
+            </span>
+            
+        </div>
+        </form>
+    </div>
 </div>
 <script>
+const slugs = {{slugs|safe}}
+console.log(slugs)
 
 const paras = document.querySelectorAll('.article p');
 let minText = 140

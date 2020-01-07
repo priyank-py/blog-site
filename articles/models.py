@@ -1,4 +1,5 @@
 from django.db import models
+from django.shortcuts import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.utils.text import slugify
 from django.utils import timezone
@@ -35,4 +36,6 @@ class Article(models.Model):
             self.slug = slugify(f'{self.title}-{self.writer}')
         super(Article, self).save(*args, **kwargs)
     
-
+    def get_absolute_url(self):
+        return reverse("each_article", kwargs={"slug": self.slug})
+    
