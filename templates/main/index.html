@@ -22,8 +22,7 @@
         {% csrf_token %}
         <div class="input-group bg-light" style="border-radius:40px;">
         
-            <input autocomplete="off" type="text" class="form-control form-control-lg shadow-none border-0" style="background:none;" name="searched">
-
+            <input autocomplete="off" type="text" class="form-control form-control-lg shadow-none border-0" style="background:none;" id="search-text" name="searched">
             <span class="input-group-append text-dark d-flex align-items-center">
                 <button type="submit" style="background:none;" class="border-0">
                     <i class="fa fa-search mr-2" style="font-size:25px;"></i>
@@ -31,9 +30,15 @@
             </span>
             
         </div>
+            <div class="result mt-2 ">
+                <ul class="results list-group">
+
+                </ul>
+            </div>
         </form>
     </div>
 </div>
+<script src="{% static 'js\autocomplete.js' %}"></script>
 <script>
 const slugs = {{slugs|safe}}
 console.log(slugs)
@@ -51,6 +56,34 @@ const show = (id) => {
         para.textContent = para.textContent.slice(0, )
     }
 }
+
+//autocomplete
+const searchField = document.querySelector("#search-text");
+
+{% comment %} const request = new XMLHttpRequest();
+request.open("GET", "{% url 'search_api' %}");
+request.send();
+
+request.addEventListener("readystatechange", e => {
+  if (request.readyState === 4 && request.status === 200) {
+    console.log(request.responseText);
+  } else if (request.readyState === 4) {
+    console.log("data not found");
+  }
+}); {% endcomment %}
+
+
+const render = async txt => {
+    const response = await fetch("{% url 'search_api' %}")
+    const data = response.json()
+    return data
+};
+
+searchField.addEventListener("keyup", e => {
+  const searchText = searchField.value;
+
+  render(searchText).then(data => console.log(JSON.parse(data)));
+});
 
 
 </script>

@@ -1,7 +1,7 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-
+import json
 from articles.models import Article
 from articles.api.serializer import ArticleSerializer
 
@@ -15,6 +15,21 @@ def article_get_data(request, slug):
     if request.method == 'GET':
         serializer = ArticleSerializer(article)
         return Response(serializer.data)
+
+@api_view(['GET',])
+def search_get_data(request):
+    try:
+        articles = Article.objects.all()
+    except Article.DoesNotExist:
+        return Response(status.HTTP_404_NOT_FOUND)
+    
+    if request.method == 'GET':
+        search = []
+        for article in articles:
+            serializer = ArticleSerializer(article)
+            search.append(serializer.data)
+        search_json = json.dumps(search)
+        return Response(search_json)
 
 @api_view(['PUT',])
 def article_update_data_view(request, slug):
