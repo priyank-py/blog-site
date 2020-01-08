@@ -38,7 +38,6 @@
         </form>
     </div>
 </div>
-<script src="{% static 'js\autocomplete.js' %}"></script>
 <script>
 const slugs = {{slugs|safe}}
 console.log(slugs)
@@ -72,21 +71,13 @@ request.addEventListener("readystatechange", e => {
   }
 }); {% endcomment %}
 
-
-const render = async txt => {
-    const response = await fetch("{% url 'search_api' %}")
-    const data = response.json()
-    return data
-};
-
-searchField.addEventListener("keyup", e => {
-  const searchText = searchField.value;
-
-  render(searchText).then(data => console.log(JSON.parse(data)));
-});
+//autocomplete
 
 
+const url = "{% url 'search_api' %}"
 </script>
+
+<script src="{% static 'js\autocomplete.js' %}"></script>
 
 
 

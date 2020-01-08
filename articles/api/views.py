@@ -1,7 +1,7 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-import json
+
 from articles.models import Article
 from articles.api.serializer import ArticleSerializer
 
@@ -28,8 +28,8 @@ def search_get_data(request):
         for article in articles:
             serializer = ArticleSerializer(article)
             search.append(serializer.data)
-        search_json = json.dumps(search)
-        return Response(search_json)
+        
+        return Response(search)
 
 @api_view(['PUT',])
 def article_update_data_view(request, slug):
