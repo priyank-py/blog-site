@@ -56,23 +56,11 @@ const show = (id) => {
     }
 }
 
+
+
+///////////////////////////////
 //autocomplete
 const searchField = document.querySelector("#search-text");
-
-{% comment %} const request = new XMLHttpRequest();
-request.open("GET", "{% url 'search_api' %}");
-request.send();
-
-request.addEventListener("readystatechange", e => {
-  if (request.readyState === 4 && request.status === 200) {
-    console.log(request.responseText);
-  } else if (request.readyState === 4) {
-    console.log("data not found");
-  }
-}); {% endcomment %}
-
-//autocomplete
-
 
 const url = "{% url 'search_api' %}"
 </script>
